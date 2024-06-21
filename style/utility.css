@@ -1,0 +1,39 @@
+.flex {
+  display: flex;
+}
+
+.item-center {
+  align-items: center;
+}
+
+.p-0 {
+  padding: 10px;
+}
+
+.p-1 {
+  padding: 18px;
+}
+
+.fill-invert {
+  filter: invert(1);
+}
+
+.bg-grey {
+  background-color: #121212;
+}
+
+.rounded {
+  border-radius: 7px;
+}
+
+.color-grey {
+  color: #929292;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.pointer:hover {
+  color: white !important;
+}

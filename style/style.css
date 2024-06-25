@@ -67,3 +67,109 @@ body {
 .right-main {
   width: 75vw;
 }
+
+.right-main .header {
+  justify-content: space-between;
+  z-index: 2;
+  height: 54px;
+
+  position: sticky;
+  top: 0;
+}
+
+.right-main .header .nav {
+  margin: 8px 6px;
+}
+
+.right-main .header svg {
+  background-color: #000;
+  border-radius: 50%;
+  margin: 0 4px;
+}
+
+.right-main .header .buttons * {
+  margin: 0 6px;
+  padding: 16px;
+  width: 120px;
+
+  border-radius: 30px;
+  border: none;
+
+  font-size: 16px;
+  font-weight: 900;
+  font-family: inherit;
+}
+
+.right-main .header .buttons #sign-up-btn {
+  color: #a7a7a7;
+  background-color: transparent;
+}
+
+.right-main .header .buttons #log-in-btn:hover {
+  background-color: #ffffff;
+  padding: 18px;
+}
+
+.right-main .content h1 {
+  padding: 6px 16px;
+  font-size: 24px;
+}
+
+.right-main .content .cardContainer {
+  flex-wrap: wrap;
+}
+
+.right-main .card {
+  width: 200px;
+  padding: 12px;
+  position: relative;
+}
+
+.right-main .card img {
+  border-radius: 6px;
+}
+
+.right-main .card:hover {
+  background-color: #1a1a1a;
+  .play {
+    opacity: 1;
+  }
+}
+
+.right-main .card .play:hover {
+  top: 155px;
+  width: 20px;
+  height: 20px;
+}
+
+.right-main .card .play {
+  position: absolute;
+  top: 156px;
+  right: 16px;
+  opacity: 0;
+
+  width: 18px;
+  height: 18px;
+  background-color: #1ed760;
+  border-radius: 50%;
+  padding: 10px;
+
+  transition: opacity 0.4s ease-out;
+  box-shadow: 0px 4px 8px 0px #2d2c2c;
+}
+
+.right-main .cardDescription {
+  padding: 8px 10px 0 0;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.right-main .cardDescription h2 {
+  font-size: 14px;
+}
+
+.right-main .cardDescription p {
+  font-size: 12px;
+  color: #a2a2a2;
+}

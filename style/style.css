@@ -216,12 +216,34 @@ body {
   width: 100%;
   padding: 5px 0;
   background-color: #1b2217;
+}
 
+.right-main .play-bar .control-btn {
   justify-content: center;
   gap: 16px;
 }
 
-.right-main .play-bar button {
+.right-main .play-bar .control-btn button {
   background-color: transparent;
   border: none;
+  cursor: pointer;
+}
+
+.right-main .play-bar .seek-bar {
+  height: 2px;
+  width: 96%;
+  margin: 3px auto;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.right-main .play-bar .seek-bar .circle {
+  height: 2px;
+  width: 2px;
+  border-radius: 50%;
+  background-color: white;
+  outline: 4px solid;
+  position: relative;
+  left: 0%;
+  transition: left 0.5s;
 }

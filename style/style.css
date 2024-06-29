@@ -42,10 +42,36 @@ body {
 
 .left-sidebar .library .header {
   gap: 8px;
+  margin-bottom: 10px;
 }
 
 .left-sidebar .library h2 {
   font-size: 14px;
+}
+
+.left-sidebar .library .song-list {
+  margin: 10px 0;
+  height: 62vh;
+  overflow-y: auto;
+}
+
+.left-sidebar .library .song-list li {
+  margin: 10px 0;
+  cursor: pointer;
+
+  display: grid;
+  grid-template-columns: 26px auto 30px;
+  align-items: center;
+  gap: 10px;
+}
+
+.left-sidebar .library .song-list .author {
+  color: #929292;
+  font-size: 0.8rem;
+}
+
+.left-sidebar .library .song-list .play-now {
+  justify-self: end;
 }
 
 .left-sidebar .footer {

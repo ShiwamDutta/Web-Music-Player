@@ -16,3 +16,32 @@ async function getSong(folder = "songs") {
 
   return songs;
 }
+
+(async function () {
+  const songs = await getSong();
+
+  // Add songs to library
+  let songUL = document.querySelector(".library .song-list ul");
+  songUL.innerHTML = "";
+  songs.forEach((song) => {
+    console.log(song.replace(".mp3", ""));
+    let songName = song.replace(".mp3", "").replaceAll("_", " ");
+    songUL.innerHTML += `<li>
+      <img
+        class="fill-invert"
+        width="20"
+        src="./image/music.svg"
+        alt="Music"
+      />
+      <div class="song-info">
+        <div class="name">${songName}</div>
+        <div class="author">Singer</div>
+      </div>
+      <img
+        src="./image/play_now.svg"
+        class="fill-invert play-now"
+        alt="Play Now"
+      />
+    </li>`;
+  });
+})();

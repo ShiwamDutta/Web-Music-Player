@@ -58,6 +58,7 @@ body {
 .left-sidebar .library .song-list li {
   margin: 10px 0;
   cursor: pointer;
+  font-size: 14px;
 
   display: grid;
   grid-template-columns: 26px auto 30px;

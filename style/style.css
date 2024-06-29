@@ -8,7 +8,7 @@
 body {
   background-color: black;
   font-family: "Roboto", sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   color: white;
 }
 
@@ -46,7 +46,7 @@ body {
 }
 
 .left-sidebar .library h2 {
-  font-size: 14px;
+  font-size: 1.1rem;
 }
 
 .left-sidebar .library .song-list {
@@ -82,17 +82,13 @@ body {
 .left-sidebar .footer a {
   color: #929292;
   text-decoration: none;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .left-sidebar .footer .links-list {
   margin: 4px 0;
   gap: 4px 10px;
   flex-wrap: wrap;
-}
-
-.left-sidebar .footer .links-list span {
-  font-size: 11px;
 }
 
 .right-main {

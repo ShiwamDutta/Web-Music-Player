@@ -51,7 +51,7 @@ body {
 
 .left-sidebar .library .song-list {
   margin: 10px 0;
-  height: 62vh;
+  height: 54vh;
   overflow-y: auto;
 }
 
@@ -101,13 +101,13 @@ body {
 .right-main .header {
   justify-content: space-between;
   z-index: 2;
-  height: 54px;
+  height: 42px;
 
   position: sticky;
   top: 0;
 }
 
-.right-main .header .nav {
+.right-main .header > * {
   margin: 8px 6px;
 }
 
@@ -119,13 +119,13 @@ body {
 
 .right-main .header .buttons * {
   margin: 0 6px;
-  padding: 16px;
-  width: 120px;
+  padding: 10px;
+  width: 90px;
 
   border-radius: 30px;
   border: none;
 
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 900;
   font-family: inherit;
 }
@@ -137,12 +137,12 @@ body {
 
 .right-main .header .buttons #log-in-btn:hover {
   background-color: #ffffff;
-  padding: 18px;
+  padding: 11px;
 }
 
 .right-main .content {
   width: 100%;
-  height: calc(100vh - 161px);
+  height: calc(100vh - 152px);
   overflow: auto;
 }
 
@@ -157,7 +157,7 @@ body {
 }
 
 .right-main .card {
-  width: 200px;
+  width: 180px;
   padding: 12px;
   position: relative;
 }
@@ -174,15 +174,15 @@ body {
 }
 
 .right-main .card .play:hover {
-  top: 155px;
+  top: 142px;
   width: 20px;
   height: 20px;
 }
 
 .right-main .card .play {
   position: absolute;
-  top: 156px;
-  right: 16px;
+  top: 144px;
+  right: 24px;
   opacity: 0;
 
   width: 18px;

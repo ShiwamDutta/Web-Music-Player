@@ -111,4 +111,16 @@ function playMusic(track) {
       (currSong.currentTime / currSong.duration) * 100
     }%`;
   });
+
+  // Add an event listener to seek-bar
+  document.querySelector(".seek").addEventListener("click", (e) => {
+    const seekBarRect = document
+      .querySelector(".seek-bar")
+      .getBoundingClientRect();
+    const offsetX = e.pageX - seekBarRect.left;
+    const seekBarWidth = seekBarRect.width;
+    const percent = (offsetX / seekBarWidth) * 100;
+    document.querySelector(".seek-complete").style.width = percent + "%";
+    currSong.currentTime = (currSong.duration * percent) / 100;
+  });
 })();

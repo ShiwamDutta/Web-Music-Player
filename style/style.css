@@ -216,15 +216,20 @@ body {
   bottom: 10px;
 
   width: 100%;
-  padding: 5px 0;
   background-color: #1b2217;
 }
 
 .right-main .play-bar .play-details {
-  padding: 4px 8px;
+  padding: 6px 10px 12px;
   font-size: 14px;
   font-weight: 200;
-  justify-content: space-between;
+
+  display: grid;
+  grid-template-columns: 4fr 3fr 4fr;
+}
+
+.right-main .play-bar #song-time {
+  justify-self: end;
 }
 
 .right-main .play-bar .control-btn {
@@ -238,10 +243,14 @@ body {
   cursor: pointer;
 }
 
+.right-main .play-bar .seek {
+  padding: 8px 0;
+}
+
 .right-main .play-bar .seek-bar {
   height: 2px;
   width: 96%;
-  margin: 3px auto;
+  margin: auto;
   background-color: white;
   border-radius: 2px;
 }

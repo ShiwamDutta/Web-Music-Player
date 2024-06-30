@@ -1,6 +1,20 @@
 const songFolder = "/Spotify-clone/songs/";
 const currSong = new Audio();
 
+function secondsToMinutesSeconds(seconds) {
+  if (isNaN(seconds) || seconds < 0) {
+    return "00:00";
+  }
+
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
+
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(remainingSeconds).padStart(2, "0");
+
+  return `${formattedMinutes}:${formattedSeconds}`;
+}
+
 async function getSong(folder = songFolder) {
   let localHost = "http://127.0.0.1:3000";
   let response = await fetch(`${localHost}${folder}`);
@@ -85,5 +99,16 @@ function playMusic(track) {
       currSong.pause();
       document.querySelector("#play img").src = "./image/play.svg";
     }
+  });
+
+  // Listen to time-update event
+  currSong.addEventListener("timeupdate", () => {
+    document.querySelector(
+      ".play-bar #song-time"
+    ).innerHTML = `${secondsToMinutesSeconds(currSong.currentTime)} /
+      ${secondsToMinutesSeconds(currSong.duration)}`;
+    document.querySelector(".seek-bar .seek-complete").style.width = `${
+      (currSong.currentTime / currSong.duration) * 100
+    }%`;
   });
 })();

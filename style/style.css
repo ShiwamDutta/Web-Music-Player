@@ -245,13 +245,25 @@ body {
   border-radius: 2px;
 }
 
+.right-main .play-bar .seek-bar .seek-complete {
+  height: 2px;
+  width: 0%;
+  border-radius: 2px;
+  background-color: red;
+  transition: width 0.5s;
+}
+
 .right-main .play-bar .seek-bar .circle {
   height: 2px;
   width: 2px;
   border-radius: 50%;
-  background-color: white;
-  outline: 4px solid;
+  background-color: red;
   position: relative;
-  left: 0%;
-  transition: left 0.5s;
+  left: 100%;
+}
+
+.right-main .play-bar .seek:hover {
+  .circle {
+    outline: 4px solid red;
+  }
 }

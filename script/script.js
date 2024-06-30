@@ -25,6 +25,10 @@ function playMusic(track) {
   currSong.src = songFolder + track;
   currSong.play();
   document.querySelector(".play-bar #play img").src = "./image/pause.svg";
+  document.querySelector(".play-bar #song-name").innerHTML = track
+    .replace(".mp3", "")
+    .replaceAll("_", " ");
+  document.querySelector(".play-bar #song-time").innerHTML = "00.00 / 00.00";
 }
 
 (async function () {
@@ -57,6 +61,10 @@ function playMusic(track) {
 
   // Setting default audio file
   currSong.src = songFolder + songs[0];
+  document.querySelector(".play-bar #song-name").innerHTML = songs[0]
+    .replace(".mp3", "")
+    .replaceAll("_", " ");
+  document.querySelector(".play-bar #song-time").innerHTML = `00:00 / 00:00`;
 
   // Attach event listener to each song
   Array.from(

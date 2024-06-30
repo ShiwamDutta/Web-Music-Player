@@ -142,7 +142,7 @@ body {
 
 .right-main .content {
   width: 100%;
-  height: calc(100vh - 121px);
+  height: calc(100vh - 161px);
   overflow: auto;
 }
 
@@ -217,6 +217,13 @@ body {
   width: 100%;
   padding: 5px 0;
   background-color: #1b2217;
+}
+
+.right-main .play-bar .play-details {
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: 200;
+  justify-content: space-between;
 }
 
 .right-main .play-bar .control-btn {

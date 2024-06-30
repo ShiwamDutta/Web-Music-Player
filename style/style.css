@@ -153,6 +153,7 @@ body {
 
 .right-main .content .cardContainer {
   flex-wrap: wrap;
+  row-gap: 10px;
 }
 
 .right-main .card {

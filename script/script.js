@@ -1,4 +1,4 @@
-const songFolder = "/Spotify-clone/songs/";
+const songFolder = "songs/";
 const currSong = new Audio();
 
 function secondsToMinutesSeconds(seconds) {
@@ -16,13 +16,13 @@ function secondsToMinutesSeconds(seconds) {
 }
 
 async function getSong(folder = songFolder) {
-  let localHost = "http://127.0.0.1:3000";
-  let response = await fetch(`${localHost}${folder}`);
-  let data = await response.text();
+  const response = await fetch(`./${folder}`);
+  // console.log(response.headers.get('content-type')) // --> text/html
+  const data = await response.text();
 
-  let dummyElement = document.createElement("div");
+  const dummyElement = document.createElement("div");
   dummyElement.innerHTML = data;
-  let songLinks = dummyElement.getElementsByTagName("a");
+  const songLinks = dummyElement.getElementsByTagName("a");
 
   const songs = [];
   Array.from(songLinks).forEach((element) => {
@@ -34,63 +34,42 @@ async function getSong(folder = songFolder) {
   return songs;
 }
 
-function playMusic(track) {
-  console.log(songFolder + track);
-  currSong.src = songFolder + track;
-  currSong.play();
-  document.querySelector(".play-bar #play img").src = "./image/pause.svg";
+function libraryEventListener(songList) {
+  Array.from(
+    document.querySelector(".song-list").getElementsByTagName("li")
+  ).forEach((item, index) => {
+    item.addEventListener("click", () => playMusic(songList[index]));
+  });
+}
+
+function updateCurrentSong(track) {
+  console.log(`${songFolder}${track}`);
+  currSong.src = `${songFolder}${track}`;
   document.querySelector(".play-bar #song-name").innerHTML = track
     .replace(".mp3", "")
     .replaceAll("_", " ");
-  document.querySelector(".play-bar #song-time").innerHTML = "00.00 / 00.00";
+  document.querySelector(".play-bar #song-time").innerHTML = "00:00 / 00:00";
 }
 
-(async function () {
-  const songs = await getSong();
+function playMusic(track) {
+  updateCurrentSong(track);
+  currSong.play();
+  document.querySelector(".play-bar #play img").src = "./image/pause.svg";
+}
 
-  // Add songs to library
-  let songUL = document.querySelector(".library .song-list ul");
-  songUL.innerHTML = "";
-  songs.forEach((song) => {
-    console.log(song.replace(".mp3", ""));
-    let songName = song.replace(".mp3", "").replaceAll("_", " ");
-    songUL.innerHTML += `<li>
-      <img
-        class="fill-invert"
-        width="20"
-        src="./image/music.svg"
-        alt="Music"
-      />
-      <div class="song-info">
-        <div class="name">${songName}</div>
-        <div class="author">Singer</div>
-      </div>
-      <img
-        src="./image/play_now.svg"
-        class="fill-invert play-now"
-        alt="Play Now"
-      />
-    </li>`;
+function currentSongTimeUpdate() {
+  currSong.addEventListener("timeupdate", () => {
+    document.querySelector(
+      ".play-bar #song-time"
+    ).innerHTML = `${secondsToMinutesSeconds(currSong.currentTime)} /
+      ${secondsToMinutesSeconds(currSong.duration)}`;
+    document.querySelector(".seek-bar .seek-complete").style.width = `${
+      (currSong.currentTime / currSong.duration) * 100
+    }%`;
   });
+}
 
-  // Setting default audio file
-  currSong.src = songFolder + songs[0];
-  document.querySelector(".play-bar #song-name").innerHTML = songs[0]
-    .replace(".mp3", "")
-    .replaceAll("_", " ");
-  document.querySelector(".play-bar #song-time").innerHTML = `00:00 / 00:00`;
-
-  // Attach event listener to each song
-  Array.from(
-    document.querySelector(".song-list").getElementsByTagName("li")
-  ).forEach((e) => {
-    e.addEventListener("click", () => {
-      let song = e.querySelector(".song-info .name").innerHTML;
-      playMusic(`${song.replaceAll(" ", "_")}.mp3`);
-    });
-  });
-
-  // Attach event listener to play, skip next & previous buttons of play-bar
+function controlButtonActionListener(songList) {
   document.querySelector("#play").addEventListener("click", () => {
     if (currSong.paused) {
       currSong.play();
@@ -103,7 +82,7 @@ function playMusic(track) {
 
   document.querySelector("#previous").addEventListener("click", () => {
     let previousTrack =
-      songs[songs.indexOf(currSong.src.split(`${songFolder}`)[1]) - 1];
+      songList[songList.indexOf(currSong.src.split(`${songFolder}`)[1]) - 1];
     if (previousTrack != undefined) {
       playMusic(previousTrack);
     }
@@ -111,32 +90,57 @@ function playMusic(track) {
 
   document.querySelector("#next").addEventListener("click", () => {
     let nextTrack =
-      songs[songs.indexOf(currSong.src.split(`${songFolder}`)[1]) + 1];
+      songList[songList.indexOf(currSong.src.split(`${songFolder}`)[1]) + 1];
     if (nextTrack != undefined) {
       playMusic(nextTrack);
     }
   });
+}
 
-  // Listen to time-update event
-  currSong.addEventListener("timeupdate", () => {
-    document.querySelector(
-      ".play-bar #song-time"
-    ).innerHTML = `${secondsToMinutesSeconds(currSong.currentTime)} /
-      ${secondsToMinutesSeconds(currSong.duration)}`;
-    document.querySelector(".seek-bar .seek-complete").style.width = `${
-      (currSong.currentTime / currSong.duration) * 100
-    }%`;
-  });
-
-  // Add an event listener to seek-bar
-  document.querySelector(".seek").addEventListener("click", (e) => {
+function seekActionListener() {
+  document.querySelector(".seek").addEventListener("click", (event) => {
     const seekBarRect = document
       .querySelector(".seek-bar")
       .getBoundingClientRect();
-    const offsetX = e.pageX - seekBarRect.left;
+    const offsetX = event.pageX - seekBarRect.left;
     const seekBarWidth = seekBarRect.width;
     const percent = (offsetX / seekBarWidth) * 100;
     document.querySelector(".seek-complete").style.width = percent + "%";
     currSong.currentTime = (currSong.duration * percent) / 100;
   });
+}
+
+(async function () {
+  const songs = await getSong();
+
+  // Add songs to library
+  const songUL = document.querySelector(".library .song-list ul");
+  songUL.innerHTML = "";
+  songs.forEach((song) => {
+    console.log(song);
+    let songName = song.replace(".mp3", "").replaceAll("_", " ");
+    songUL.innerHTML += `<li>
+      <img class="fill-invert" width="20" src="./image/music.svg" alt="Music" />
+      <div class="song-info">
+        <div class="name">${songName}</div>
+        <div class="author">Singer</div>
+      </div>
+      <img src="./image/play_now.svg" class="fill-invert play-now" alt="Play Now" />
+    </li>`;
+  });
+
+  // Setting default audio file
+  updateCurrentSong(songs[0]);
+
+  // Attach event listener to each song in playlist
+  libraryEventListener(songs);
+
+  // Attach event listener to play, skip next & previous buttons of play-bar
+  controlButtonActionListener(songs);
+
+  // Add an event listener to seek-bar
+  seekActionListener();
+  
+  // Listen to time-update event
+  currentSongTimeUpdate();
 })();

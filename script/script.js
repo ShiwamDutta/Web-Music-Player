@@ -101,6 +101,22 @@ function playMusic(track) {
     }
   });
 
+  document.querySelector("#previous").addEventListener("click", () => {
+    let previousTrack =
+      songs[songs.indexOf(currSong.src.split(`${songFolder}`)[1]) - 1];
+    if (previousTrack != undefined) {
+      playMusic(previousTrack);
+    }
+  });
+
+  document.querySelector("#next").addEventListener("click", () => {
+    let nextTrack =
+      songs[songs.indexOf(currSong.src.split(`${songFolder}`)[1]) + 1];
+    if (nextTrack != undefined) {
+      playMusic(nextTrack);
+    }
+  });
+
   // Listen to time-update event
   currSong.addEventListener("timeupdate", () => {
     document.querySelector(

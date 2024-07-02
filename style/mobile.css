@@ -1,0 +1,43 @@
+@media screen and (max-width: 800px) {
+  .left-sidebar {
+    width: calc(50vw - 20px);
+    background-color: black;
+    z-index: 1;
+
+    transform: translateX(-200%);
+    transition: transform 0.4s;
+  }
+
+  .right-main {
+    margin-left: 0;
+    width: calc(100vw - 20px);
+  }
+
+  .left-sidebar .home #cross {
+    display: inline;
+  }
+
+  .right-main .header #hamburger {
+    display: inline;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .left-sidebar {
+    width: calc(100vw - 20px);
+  }
+
+  .right-main .play-bar .play-details {
+    grid-template-columns: 4fr 3fr;
+  }
+
+  .right-main .play-bar #song-time {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .right-main .header .nav > svg {
+    display: none;
+  }
+}

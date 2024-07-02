@@ -1,6 +1,9 @@
 const songFolder = "songs/";
 const currSong = new Audio();
 
+// toggle hamburger menu for small screen
+toggleSideMenu();
+
 function secondsToMinutesSeconds(seconds) {
   if (isNaN(seconds) || seconds < 0) {
     return "00:00";
@@ -13,6 +16,18 @@ function secondsToMinutesSeconds(seconds) {
   const formattedSeconds = String(remainingSeconds).padStart(2, "0");
 
   return `${formattedMinutes}:${formattedSeconds}`;
+}
+
+function toggleSideMenu() {
+  const leftPanel = document.querySelector(".left-sidebar");
+
+  document.querySelector("#hamburger").addEventListener("click", () => {
+    leftPanel.style.transform = "none";
+  });
+
+  document.querySelector("#cross").addEventListener("click", () => {
+    leftPanel.style.transform = "translateX(-200%)";
+  });
 }
 
 async function getSong(folder = songFolder) {
@@ -140,7 +155,7 @@ function seekActionListener() {
 
   // Add an event listener to seek-bar
   seekActionListener();
-  
+
   // Listen to time-update event
   currentSongTimeUpdate();
 })();

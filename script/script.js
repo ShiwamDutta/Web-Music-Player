@@ -31,22 +31,10 @@ function toggleSideMenu() {
 }
 
 async function getSong(folder = songFolder) {
-  const response = await fetch(`./${folder}`);
-  // console.log(response.headers.get('content-type')) // --> text/html
+  const response = await fetch(`./${folder}details.txt`);
+  // console.log(response.headers.get('content-type')) // --> text/plain
   const data = await response.text();
-
-  const dummyElement = document.createElement("div");
-  dummyElement.innerHTML = data;
-  const songLinks = dummyElement.getElementsByTagName("a");
-
-  const songs = [];
-  Array.from(songLinks).forEach((element) => {
-    if (element.href.endsWith(".mp3")) {
-      songs.push(element.href.split(`${folder}`)[1]);
-    }
-  });
-
-  return songs;
+  return data.split("\n");
 }
 
 function libraryEventListener(songList) {
